@@ -6,8 +6,8 @@
     ;; Support = as built-in predicate
     (:types
         ;;pacman
-        ;;ghost
-        ;;food
+        ghost
+        food
         ;;capsule
         location
         ;;agent ;;agent is pacman or ghost or food or capsule
@@ -16,6 +16,7 @@
     (:predicates
         (move ?from ?to -location)
         (at ?lo -location)
+        (visited ?lo -location)
         (connected ?start ?end - location)
         (isGhost ?lo -location)
         (isFood ?lo -location)
@@ -32,6 +33,7 @@
         )
         :effect (and
             (at ?to)
+            (visited ?to)
             (not (at ?from))
         )
     )

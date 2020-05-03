@@ -14,7 +14,7 @@
 
 
     (:objects
-        P -pacman
+        ;;P -pacman
         G -ghost
         F -food
         a1 a2 a3 b1 b2 b3 - location
@@ -41,7 +41,7 @@
 	)
 
     (:goal
-        (at a3)
+        (visited a3)
        
 	)
 )
