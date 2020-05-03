@@ -15,8 +15,8 @@
 
     (:objects
         ;;P -pacman
-        G -ghost
-        F -food
+        ;;G - ghost
+        ;;F - food
         a1 a2 a3 b1 b2 b3 - location
 	)
 	

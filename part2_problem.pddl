@@ -14,10 +14,10 @@
 
 
     (:objects
-        G -ghost
-        F -food
-        C -capsule
-        a1 a2 a3 a4 a5 b1 b2 b3 b4 b5 -location
+        ;;G - ghost
+        ;;F - food
+        ;;C - capsule
+        a1 a2 a3 a4 a5 b1 b2 b3 b4 b5 - location
         ;;safe -bool
 	)
 	

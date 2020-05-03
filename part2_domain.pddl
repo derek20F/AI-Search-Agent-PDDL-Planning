@@ -6,19 +6,19 @@
     ;; Support = as built-in predicate
     (:types
         location
-        ghost
-        food
-        capsule
+        ;;ghost
+        ;;food
+        ;;capsule
     )
 
     (:predicates
-        (move ?from ?to -location)
-        (at ?lo -location)
-        (visited ?lo -location)
+        (move ?from ?to - location)
+        (at ?lo - location)
+        (visited ?lo - location)
         (connected ?start ?end - location)
-        (isGhost ?lo -location)
-        (isFood ?lo -location)
-        (isCapsule ?lo -location)
+        (isGhost ?lo - location)
+        (isFood ?lo - location)
+        (isCapsule ?lo - location)
         (invulnerable)
         ;;(isSafe ?safe -bool)
         
@@ -27,7 +27,7 @@
 
 
     (:action move
-        :parameters (?from ?to -location)
+        :parameters (?from ?to - location)
         :precondition (and 
             (at ?from)
             (connected ?from ?to)
