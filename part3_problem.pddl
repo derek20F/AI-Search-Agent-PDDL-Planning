@@ -14,7 +14,7 @@
 
 
     (:objects
-        ;;G - ghost
+        ;;a4 b4 - ghost
         ;;F - food
         ;;C - capsule
         a1 a2 a3 a4 a5 b1 b2 b3 b4 b5 - location
@@ -54,17 +54,23 @@
         (isCapsule b2)
         (isCapsule b5)
         (at a1)
+        
         ;;(isSafe safe);;not sure
         ;;(not isInvulnerable)
 	)
 
     (:goal
+        
         (and
             
-            (visited a5)
             (visited a4)
             (visited b4)
+            (visited a5)
         )
+        
+        
+    
+        
 
 	)
 )

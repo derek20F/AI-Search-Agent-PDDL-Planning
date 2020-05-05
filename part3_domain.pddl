@@ -23,7 +23,7 @@
         (invulnerable_step2)
         ;;(firstStep)
         ;;(secondStep)
-        (eatAllGhost)
+        ;;(eatAllGhost)
         
         
         ;;(isSafe ?safe -bool)
@@ -36,24 +36,28 @@
     (:action move
         :parameters (?from ?to - location)
         :precondition (and 
+            ;;(not (exists (?lo - location) (isGhost ?lo)))
             (at ?from)
             (connected ?from ?to)
             ;;(isSafe ?safe)
             (
                 or (not (isGhost ?to)) (invulnerable_step1) (invulnerable_step2) ;;(eatAllGhost)
             )
+            
             (
-                or (not (isFood ?to)) (eatAllGhost) ;;can eat food, only after eat all ghost
+                or (not (isFood ?to)) (not (exists (?lo - location) (isGhost ?lo))) ;;can eat food, only after eat all ghost
             )
-            ;;((isInvulnerable ?invulnerable) or (isGhost ?to))
-            ;;(when (isInvulnerable)
-            ;;    (not (isGhost ?to))
-            ;;)   
+
+            
         )
         :effect (and
             (at ?to)
             (visited ?to)
             (not (at ?from))
+            
+            (when (isGhost ?to)
+                (not (isGhost ?to))
+            )
             
             (when (invulnerable_step2)
                 (not(invulnerable_step2))
