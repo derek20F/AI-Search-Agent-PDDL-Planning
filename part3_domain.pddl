@@ -58,6 +58,10 @@
             (when (isGhost ?to)
                 (not (isGhost ?to))
             )
+
+            (when (isFood ?to)
+                (not (isFood ?to))
+            )
             
             (when (invulnerable_step2)
                 (not(invulnerable_step2))
@@ -71,7 +75,10 @@
             )
             
             (when (isCapsule ?to)
-                (invulnerable_step1)
+                (and
+                    (not (isCapsule ?to))
+                    (invulnerable_step1)
+                )
             )
 
         )
