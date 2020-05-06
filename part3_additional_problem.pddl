@@ -1,13 +1,16 @@
 (define
     (problem pacman-level-1)
-    (:domain pacman_mid)
+    (:domain pacman_hard)
 
 ;; problem map
 ;;  | 1 | 2 | 3 | 4 | 5 |
 ;; -|---|--- ---|---|---|
-;; a| P | _ | _ | G | F |
-;; b| C | _ | _ | G | _ |
+;; a| P | G | C | G | F |
+;; b| _ | C | F | G | C |
 ;;  |---|---|---|---|---|
+
+  
+
 
 
     (:objects
@@ -15,7 +18,7 @@
 	)
 	
 	(:init
-        (connected a1 a2) 
+        (connected a1 a2)
         (connected a2 a1)  
         (connected a2 a3)
         (connected a3 a2)
@@ -43,14 +46,21 @@
         (connected b5 a5)
         (isGhost a4)
         (isGhost b4)
+        (isGhost a2)
         (isFood a5)
-        (isCapsule b1)
+        (isFood b3)
+        (isCapsule b2)
+        (isCapsule a3)
+        (isCapsule b5)
         (at a1)
 	)
 
     (:goal
-        ;;Eat all the foods 
-        (not(exists (?lo - location) (isFood ?lo)))
-           
+        
+        (and 
+            (not(exists (?lo - location) (isFood ?lo)))
+            (not(exists (?lo - location) (isGhost ?lo)))
+        )
+
 	)
 )

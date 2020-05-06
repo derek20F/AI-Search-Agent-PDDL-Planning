@@ -8,20 +8,13 @@
 ;; a| P | G | F | 
 ;; b| _ | _ | _ | 
 ;;  |---|---|---| 
-;; Expected Solution (move a1 b1) (move b1 b2) (move b2 b3) (move b3 a3)
-  
-
-
 
     (:objects
-        ;;P -pacman
-        ;;G - ghost
-        ;;F - food
         a1 a2 a3 b1 b2 b3 - location
 	)
 	
 	(:init
-        (connected a1 a2) ;;instead of write for each, is there other method?
+        (connected a1 a2)
         (connected a2 a1)  
         (connected a2 a3)
         (connected a3 a2)
@@ -41,7 +34,7 @@
 	)
 
     (:goal
-        (visited a3)
-       
+        ;;Eat all the foods
+        (not(exists (?lo - location) (isFood ?lo)))
 	)
 )

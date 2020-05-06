@@ -14,15 +14,11 @@
 
 
     (:objects
-        ;;a4 b4 - ghost
-        ;;F - food
-        ;;C - capsule
         a1 a2 a3 a4 a5 b1 b2 b3 b4 b5 - location
-        ;;safe -bool
 	)
 	
 	(:init
-        (connected a1 a2) ;;instead of write for each, is there other method?
+        (connected a1 a2)
         (connected a2 a1)  
         (connected a2 a3)
         (connected a3 a2)
@@ -54,18 +50,13 @@
         (isCapsule b2)
         (isCapsule b5)
         (at a1)
-        
-        ;;(isSafe safe);;not sure
-        ;;(not isInvulnerable)
 	)
 
     (:goal
         
-        (and
-            
-            (visited a4)
-            (visited b4)
-            (visited a5)
+        (and 
+            (not(exists (?lo - location) (isFood ?lo)))
+            (not(exists (?lo - location) (isGhost ?lo)))
         )
         
         

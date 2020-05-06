@@ -5,12 +5,7 @@
     ;; Allow "when" in action effects
     ;; Support = as built-in predicate
     (:types
-        ;;pacman
-        ;;ghost
-        ;;food
-        ;;capsule
         location
-        ;;agent ;;agent is pacman or ghost or food or capsule
     )
 
     (:predicates
@@ -23,18 +18,22 @@
 
     )
 
-
+    ;;Eat all the food, while avoiding the ghosts
     (:action move
         :parameters (?from ?to - location)
         :precondition (and 
             (at ?from)
             (connected ?from ?to)
-            (not (isGhost ?to))
+            (not (isGhost ?to)) ;;Avoid the ghosts
         )
         :effect (and
             (at ?to)
             (visited ?to)
             (not (at ?from))
+            ;;Consume the food
+            (when (isFood ?to)
+                (not(isFood ?to))
+            )
         )
     )
 )

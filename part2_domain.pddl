@@ -6,9 +6,6 @@
     ;; Support = as built-in predicate
     (:types
         location
-        ;;ghost
-        ;;food
-        ;;capsule
     )
 
     (:predicates
@@ -20,32 +17,37 @@
         (isFood ?lo - location)
         (isCapsule ?lo - location)
         (invulnerable)
-        ;;(isSafe ?safe -bool)
-        
-
     )
 
-
+    ;;Eat all the ghost on the map
+    ;;Effect of capsule last forever
+    ;;Do not need to eat all the ghost
     (:action move
         :parameters (?from ?to - location)
         :precondition (and 
             (at ?from)
             (connected ?from ?to)
-            ;;(isSafe ?safe)
-            (
-                or (not (isGhost ?to)) (invulnerable)
-            )
-            ;;((isInvulnerable ?invulnerable) or (isGhost ?to))
-            ;;(when (isInvulnerable)
-            ;;    (not (isGhost ?to))
-            ;;)   
+            ;;Avoid the ghosts OR with capsule
+            (or 
+                (not (isGhost ?to)) ;;Avoid the ghosts
+                (invulnerable)  ;;Ignore the ghosts by the capsule
+            )  
         )
         :effect (and
             (at ?to)
             (visited ?to)
             (not (at ?from))
-            (when (isCapsule ?to)
-                (invulnerable)
+            (when (isCapsule ?to) ;;Eat the capsule and become invulerable
+                (and
+                    (invulnerable)
+                    (not(isCapsule ?to))
+                )
+            )
+            (when (isFood ?to)
+                (not(isFood ?to))
+            )
+            (when (isGhost ?to)
+                (not(isGhost ?to))
             )
         )
     )

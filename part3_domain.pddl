@@ -6,9 +6,6 @@
     ;; Support = as built-in predicate
     (:types
         location
-        ;;ghost
-        ;;food
-        ;;capsule
     )
 
     (:predicates
@@ -20,35 +17,35 @@
         (isFood ?lo - location)
         (isCapsule ?lo - location)
         (invulnerable_step1)
-        (invulnerable_step2)
-        ;;(firstStep)
-        ;;(secondStep)
-        ;;(eatAllGhost)
-        
-        
-        ;;(isSafe ?safe -bool)
-        
-
+        (invulnerable_step2)   
     )
 
-    ;;eat all ghost >> then eat food
-
+    
+    ;;Eat all the ghosts before eating the last piece of food on the map
+    ;;The effect of capsule only last for 2 steps
     (:action move
         :parameters (?from ?to - location)
         :precondition (and 
-            ;;(not (exists (?lo - location) (isGhost ?lo)))
             (at ?from)
             (connected ?from ?to)
-            ;;(isSafe ?safe)
-            (
-                or (not (isGhost ?to)) (invulnerable_step1) (invulnerable_step2) ;;(eatAllGhost)
+            (or
+                (not (isGhost ?to))
+                (invulnerable_step1)
+                (invulnerable_step2)
             )
-            
-            (
-                or (not (isFood ?to)) (not (exists (?lo - location) (isGhost ?lo))) ;;can eat food, only after eat all ghost
-            )
-
-            
+            ;;Leave the last piece of food until the final move
+            (exists (?lo - location) (isFood ?lo))
+            ;;(or 
+                
+            ;;    (not (isFood ?to));;不吃食物
+                
+                ;;(and
+                ;;    (exists (?lo - location) (isFood ?lo));;There is at least one food on the map before this action
+                ;;    (not (exists (?lo - location) (isGhost ?lo)));;沒鬼
+                ;;    (not(isFood ?to))
+                ;;)
+            ;;    (not (exists (?lo - location) (isGhost ?lo)));;There is no ghost on the map
+            ;;)          
         )
         :effect (and
             (at ?to)
@@ -76,8 +73,8 @@
             
             (when (isCapsule ?to)
                 (and
-                    (not (isCapsule ?to))
-                    (invulnerable_step1)
+                    (not (isCapsule ?to)) ;;Eat the capsule
+                    (invulnerable_step1) ;;Become invulnerable for next 2 steps
                 )
             )
 
