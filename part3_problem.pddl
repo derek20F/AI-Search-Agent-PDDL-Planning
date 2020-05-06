@@ -53,7 +53,7 @@
 	)
 
     (:goal
-        
+        ;;Eat all the ghosts and foods
         (and 
             (not(exists (?lo - location) (isFood ?lo)))
             (not(exists (?lo - location) (isGhost ?lo)))

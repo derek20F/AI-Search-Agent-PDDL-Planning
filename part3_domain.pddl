@@ -34,18 +34,8 @@
                 (invulnerable_step2)
             )
             ;;Leave the last piece of food until the final move
-            (exists (?lo - location) (isFood ?lo))
-            ;;(or 
-                
-            ;;    (not (isFood ?to));;不吃食物
-                
-                ;;(and
-                ;;    (exists (?lo - location) (isFood ?lo));;There is at least one food on the map before this action
-                ;;    (not (exists (?lo - location) (isGhost ?lo)));;沒鬼
-                ;;    (not(isFood ?to))
-                ;;)
-            ;;    (not (exists (?lo - location) (isGhost ?lo)));;There is no ghost on the map
-            ;;)          
+            ;;If there is no food, the pacman can not move
+            (exists (?lo - location) (isFood ?lo))         
         )
         :effect (and
             (at ?to)
